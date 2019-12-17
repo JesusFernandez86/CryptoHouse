@@ -1,0 +1,40 @@
+.cuerpo {
+    height: 300px;
+    background: linear-gradient(rgb(245, 243, 243), rgb(233, 232, 232));
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin: auto!important;
+}
+
+.titulo {
+    font-weight: 700;
+}
+
+.row_wallet {
+    margin-top: 20px;
+}
+
+.card1 {
+    height: 290px!important;
+}
+
+.form_button {
+    margin-left: 120px;
+}
+
+.amount,
+.price {
+    margin-left: 20px;
+}
+
+.date {
+    margin-left: 30px;
+}
+
+.value {
+    margin-left: 20px;
+}

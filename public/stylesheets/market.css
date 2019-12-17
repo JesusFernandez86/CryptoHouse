@@ -1,0 +1,20 @@
+a {
+    color: #00B7FF;
+}
+
+.cuerpo-principal {
+    margin-top: 30px;
+    height: 400px;
+    background: linear-gradient(rgb(245, 245, 245), rgb(233, 232, 232));
+}
+
+.row1,
+.row2,
+.row3,
+.row4 {
+    margin-top: 20px;
+}
+
+.titulos {
+    font-weight: 700;
+}

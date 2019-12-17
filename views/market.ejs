@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Market
+    </title>
+    <link rel='stylesheet' href='/stylesheets/market.css' />
+    <script src="/javascripts/marketUtils.js"></script>
+</head>
+
+<body onload="percenteageColour()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="card-deck">
+                                <div class="col-4">
+                                    <div class="btcwdgt-price" bw-cur="gbp" bw-theme="light"></div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="btcwdgt-price" bw-cur="usd" bw-theme="light"></div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="btcwdgt-price" bw-cur="eur" bw-theme="light"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card-deck">
+                                <div class="col-4">
+                                    <div class="btcwdgt-price" bw-cash="true" bw-cur="gbp" bw-theme="light"></div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="btcwdgt-price" bw-cash="true" bw-cur="usd" bw-theme="light"></div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="btcwdgt-price" bw-cash="true" bw-cur="eur" bw-theme="light"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="co-12">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com/markets/cryptocurrencies/prices-all/" rel="noopener" target="_blank"><span class="blue-text">Mercados de criptomonedas</span></a> por TradingView</div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                        {
+                            "width": 1520,
+                            "height": 490,
+                            "defaultColumn": "overview",
+                            "screener_type": "crypto_mkt",
+                            "displayCurrency": "USD",
+                            "colorTheme": "light",
+                            "locale": "en"
+                        }
+                    </script>
+                </div>
+                <!-- TradingView Widget END -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12  cuerpo-principal">
+                <div class="row row1">
+                    <div class="col-3 offset-1">
+                        <p class="titulos">Coin</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="titulos">Price</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="titulos"> Change 24h.</p>
+                    </div>
+                    <div class="col-2">
+                        <p class="titulos">Operate</p>
+                    </div>
+                </div>
+
+                <% results.forEach(function(currency){ %>
+                    <div class="row row1">
+                        <div class="col-3 offset-1">
+                            <%= currency.coin_name %>
+                        </div>
+                        <div class="col-3">
+                            <%= currency.value_usd %> <span>$</span>
+                        </div>
+                        <div class="col-3">
+                            <span class="numeros"><%= Math.floor(Math.random() * (10 - (-10)) + 1) + (-10) %> %</span>
+                        </div>
+                        <div class="col-2">
+                            <a href="/exchange"><button type="submit" class="btn btn-secondary">Operate</button></a>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

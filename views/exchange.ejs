@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/exchange.css">
+    <script src="/javascripts/Global.js"></script>
+    <script src="/javascripts/exchangeUtils.js"></script>
+    <title>Exchange</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="offset-1 col-5">
+                <div class="btcwdgt-chart" bw-cash="true" bw-theme="light"></div>
+            </div>
+            <div class="col-5">
+                <div class="btcwdgt-chart" bw-theme="light"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" offset-2 col-4">
+                <form action="/exchange/exchangeBuy" method="POST" onsubmit="checkAmountCoins()">
+                    <h5>Exchange</h5>
+                    <div class="form-group">
+                        <label for="amount_buy">Amount</label>
+                        <input type="number" class="form-control" id="amount_buy" name="amount_buy" placeholder="Amount" onkeyup="paintResult()">
+                    </div>
+                    <div class="form-group">
+                        <label for="coin_buy">From</label>
+                        <select class="form-control" id="coin_buy" name="coin_buy" onclick="paintResult()">
+                               <% results.forEach(function(currencies){%>
+                                <option><%= currencies.coin_name %></option>
+                               <%}) %>                          
+                              </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount_buy2">Amount</label>
+                        <input type="text" class="form-control" id="amount_buy2" name="amount_buy2" placeholder="Amount" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="coin_buy2">To</label>
+                        <select class="form-control" id="coin_buy2" name="coin_buy2" onclick="paintResult()">
+                                    <option>BTC</option>
+                                    <option>ETH</option>
+                                    <option>XRP</option>
+                                    <option>LTC</option>                          
+                                  </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="total_buy">Total Value</label>
+                        <input type="text" class="form-control" name="total_buy" id="total_buy" placeholder="$" readonly>
+                        <div class="offset-4 col-3"><button type="submit" class="btn btn-secondary boton">Exchange</button ></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-4">
+                <form action="/exchange/buy" method="POST" onsubmit="sus_balanace()">
+                    <h5>Buy</h5>
+                    <div class="form-group">
+                        <label for="amount_buy">USD </label>
+                        <input type="number" class="form-control" id="buy_usd" name="buy_usd" placeholder="$" onkeyup="paintResult2()">
+                    </div>
+                    <div class="form-group">
+                        <label for="coin_buy2">Coin</label>
+                        <select class="form-control" id="coin_toBuy" name="coin_toBuy" onclick="paintResult2()">
+                                        <option>BTC</option>
+                                        <option>ETH</option>
+                                        <option>XRP</option>
+                                        <option>LTC</option>                          
+                                      </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="total-btc">Coins</label>
+                        <input type="text" class="form-control" id="total_toBuy" name="total_toBuy" readonly>
+                        <div class="offset-4 col-3"><button type="submit" class="btn btn-secondary boton">Buy</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+CREATE DATABASE crypto;
+USE  crypto;
+
+CREATE TABLE currency(
+coin_id INT PRIMARY KEY NOT NULL,
+coin_name VARCHAR(3) NOT NULL,
+value_xrp  DECIMAL(10,4) NOT NULL,
+value_eth  DECIMAL(10,4) NOT NULL,
+value_btc  DECIMAL(10,4) NOT NULL,
+value_ltc DECIMAL(10,4) NOT NULL,
+value_usd DECIMAL(10,4) NOT NULL
+);   
+
+CREATE TABLE wallet(
+coin_id INT NOT NULL,
+amount NUMERIC(10,4) NOT NULL DEFAULT 1,
+CONSTRAINT fk_wallet  FOREIGN KEY (coin_id)
+REFERENCES currency(coin_id) ON DELETE CASCADE ON UPDATE CASCADE
+); 
+
+INSERT INTO wallet VALUES (1, 1);
+INSERT INTO wallet VALUES (2, 10);
+INSERT INTO wallet VALUES (3, 0);
+INSERT INTO wallet VALUES (4, 0);
+
+CREATE TABLE transaction(
+transaction_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+amount1 NUMERIC(10,4) NOT NULL,
+total_buy NUMERIC(10,4) NOT NULL,
+coin_from VARCHAR(5) NOT NULL,
+coin_to VARCHAR(5) NOT NULL,
+date VARCHAR(50) NOT NULL
+);
+
+
+
+    
+
+    
+    

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/javascripts/Global.js"></script>
+    <script src="/javascripts/walletUtils.js"></script>
+    <link rel="stylesheet" href='/stylesheets/wallet.css'>
+    <title>Wallet</title>
+</head>
+
+
+<body>
+    <div class="container-fluid ">
+        <% if (success != ''){%>
+            <div class="row">
+                <div class="offset-3 col-6">
+                    <div class="alert alert-danger" role="alert">
+                        <%= success %>>
+                    </div>
+                </div>
+            </div>
+            <% }%>
+                <div class="row ">
+                    <div class="col-12 cuerpo">
+                        <div class="row">
+                            <div class="offset-2 col-2">
+                                <p class="titulo">Coin</p>
+                            </div>
+                            <div class="col-2">
+                                <p class="titulo">Name</p>
+                            </div>
+                            <div class="col-2">
+                                <p class="titulo">Amount</p>
+                            </div>
+                            <div class="col-2">
+                                <p class="titulo">Value USD</p>
+                            </div>
+                        </div>
+
+                        <% results.forEach(function(currency){ %>
+                            <div class="row row_wallet">
+                                <div class=" offset-2 col-2">
+                                    <p class="currency_name">
+                                        <%= currency.coin_name %>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <p>
+                                        <%= currency.full_name %>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <p class="currency_amount">
+                                        <%= currency.amount %>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <p id="total" class="currency">
+                                        <%= (parseFloat(currency.amount) * parseFloat(currency.value_usd)).toFixed(2)  %>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="offset-3 col-6">
+                        <h3>TRANSACTION HISTORY</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-1 col-2">
+                        <p class="titulo">Amount</p>
+                    </div>
+                    <div class="col-1">
+                        <p class="titulo">From</p>
+                    </div>
+                    <div class="col-1">
+                        <p class="titulo">To</p>
+                    </div>
+                    <div class="col-2">
+                        <p class="titulo value">Value</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="titulo date">Date</p>
+                    </div>
+                </div>
+                <% results2.forEach(function(transaction){ %>
+                    <div class="row">
+                        <div class="offset-1 col-2">
+                            <p class="amount">
+                                <%= transaction.amount1 %>
+                            </p>
+                        </div>
+                        <div class="col-1">
+                            <p>
+                                <%= transaction.coin_from %>
+                            </p>
+                        </div>
+                        <div class="col-1">
+                            <p>
+                                <%= transaction.coin_to %>
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <p class="price">
+                                <%= transaction.total_buy %>
+                            </p>
+                        </div>
+                        <div class="col-3">
+                            <p>
+                                <%= transaction.date %>
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <a href="/wallet/delete/<%= transaction.transaction_id %>"><button type="submit" class="btn btn-light">Delete</button></a>
+                        </div>
+                    </div>
+                    <%})%>
+            </div>
+            <div class="col-3">
+                <form action="/wallet" method="POST" id="formulario" onsubmit="checkAmountCoins()">
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter amount" onkeyup="calculate()">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Coin</label>
+                        <select class="form-control" id="selectCoin" name="selectCoin" onclick="calculate()">
+                                    <option>BTC</option>
+                                    <option>ETH</option>
+                                    <option>XRP</option>
+                                    <option>LTC</option>                          
+                                  </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Value </label>
+                        <input type="text" class="form-control" id="finalValue" name="finalValue" placeholder="$">
+                    </div>
+                    <button type="submit" class="btn btn-secondary form_button">Withdraw</button>
+                </form>
+            </div>
+            <div class="col-3">
+                <div class="card card1" style="width: 18rem;">
+                    <img src="data:image/png;base64,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"
+                        class="card-img-top logo" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Balance</h5>
+                        <label for="balance"></label>
+                        <input type="text" id="balance" value="balance" readonly>
+                        <a href="exchange" class="btn btn-secondary">Buy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
